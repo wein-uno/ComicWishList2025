@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic List</title>
+</head>
+<body>
+    <h1>Comic List</h1>
+    <ul>
+        {% for comic in comics %}
+            <li>
+                {{ comic.title }} #{{ comic.number }} - Grade: {{ comic.grade }} - Price: {{ comic.price }}
+                <br>
+                <!-- Display the comic image if it exists -->
+                {% if comic.image %}
+                    <img src="{% url 'view_comic_image' comic.id %}" alt="Comic Image" width="200">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No comics available.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_comic' %}">Add a new Comic</a>
+</body>
+</html>
+
